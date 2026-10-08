@@ -1,0 +1,12 @@
+{
+  "name": "AI SaaS Frontend Kit",
+  "description": "A polished React + TypeScript frontend starter kit for AI SaaS products with unified support operations, bilingual English/Arabic RTL, dark mode, reusable UI, and a backend-ready mock data boundary.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "FRONTEND_ONLY",
+    "MOCK_DATA_LAYER",
+    "BILINGUAL_RTL",
+    "DARK_MODE",
+    "URL_DRIVEN_NAVIGATION"
+  ]
+}

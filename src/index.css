@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@custom-variant dark (.dark &, &.dark);
+
+@layer base {
+  :root {
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-arabic: 'IBM Plex Sans Arabic', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+    /* Professional Modern B2B SaaS Palette (Linear & Intercom style) */
+    --color-primary: #4f46e5;
+    --color-primary-hover: #4338ca;
+    --color-primary-light: #eef2ff;
+
+    --bg-app: #f8fafc;
+    --surface-app: #ffffff;
+    --surface-card: #ffffff;
+    --border-app: #e2e8f0;
+    --text-app: #0f172a;
+    --text-muted: #64748b;
+  }
+
+  .dark {
+    --color-primary: #6366f1;
+    --color-primary-hover: #4f46e5;
+    --color-primary-light: #1e1b4b;
+
+    --bg-app: #090d16;
+    --surface-app: #0f172a;
+    --surface-card: #131c31;
+    --border-app: #1e293b;
+    --text-app: #f8fafc;
+    --text-muted: #94a3b8;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--bg-app);
+    color: var(--text-app);
+  }
+
+  body {
+    background-color: var(--bg-app);
+    color: var(--text-app);
+    min-height: 100vh;
+  }
+
+  html[dir="rtl"],
+  html[lang="ar"] {
+    font-family: var(--font-arabic);
+  }
+
+  /* Custom subtle scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(100, 116, 139, 0.25);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(100, 116, 139, 0.45);
+  }
+}
+
+/* Tabular figures for data metrics */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
