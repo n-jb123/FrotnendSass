@@ -11,3 +11,10 @@
 - Added a fetch-based API client reference for backend integration.
 - Removed an `any` cast from Settings tabs.
 - Documented the recommended async data integration pattern.
+
+## 1.3.1 — QA hardening
+
+- Made the clean script cross-platform for Windows, macOS, and Linux.
+- Hardened deep-link parsing against malformed percent-encoded conversation IDs.
+- Added user-visible validation feedback for oversized and over-limit file selections.
+- Clarified Windows setup commands and added a commercial packaging checklist to the README.

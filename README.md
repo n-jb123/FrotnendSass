@@ -25,11 +25,10 @@ A polished React + TypeScript starter for building AI-powered SaaS products. It 
 
 ```bash
 npm install
-cp .env.example .env
 npm run dev
 ```
 
-Then open the local Vite URL shown in the terminal.
+Then open the local Vite URL shown in the terminal. Copy `.env.example` to `.env` only if you need to customize public frontend configuration. On Windows Command Prompt, use `copy .env.example .env`; in PowerShell, use `Copy-Item .env.example .env`.
 
 ## Production build
 
@@ -38,6 +37,8 @@ npm run lint
 npm run build
 npm run preview
 ```
+
+`npm run clean` is cross-platform and removes the generated `dist/` directory.
 
 ## Architecture
 
@@ -123,6 +124,16 @@ This is a **frontend starter kit**, not a complete SaaS backend. Billing, authen
 - For async production data, use an async server-state layer such as TanStack Query or SWR rather than making every view own its own request lifecycle.
 
 
+## Commercial packaging checklist
+
+Before selling or redistributing this kit, complete these owner-specific release tasks:
+
+- Add the license that matches your intended sales model and confirm you have redistribution rights for every bundled asset.
+- Publish a live demo and capture screenshots at desktop, tablet, and mobile widths.
+- Verify the target marketplace's required support/update terms and include your contact/support policy.
+- Test direct URL entry and refresh on your chosen host; configure SPA fallback for application routes.
+- Re-run `npm ci`, `npm run lint`, `npm run build`, and `npm audit` on the release candidate.
+
 ## Release status
 
-**v1.3.0** is the release-hardening build. It includes optimized avatar assets and a warning-free Vite config for modern Node/Vite environments.
+**v1.3.0** is the current release-hardening baseline. It includes optimized avatar assets and a Vite config using `import.meta.dirname` (requires a modern Node.js version). This is a frontend starter kit; production authentication, persistence, billing, uploads, and AI calls must be connected by the buyer.

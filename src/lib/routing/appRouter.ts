@@ -38,7 +38,15 @@ export function getInitialRoute(pathname = window.location.pathname): AppRoute {
   const segments = normalized.split('/').filter(Boolean);
   if (segments[0] === 'app') {
     const tab = segments[1] && appTabs.has(segments[1]) ? segments[1] : 'inbox';
-    const conversationId = tab === 'inbox' && segments[2] ? decodeURIComponent(segments[2]) : undefined;
+    let conversationId: string | undefined;
+    if (tab === 'inbox' && segments[2]) {
+      // A malformed percent-encoded segment should not crash initial route parsing.
+      try {
+        conversationId = decodeURIComponent(segments[2]);
+      } catch {
+        conversationId = segments[2];
+      }
+    }
     return { activeView: 'app', currentTab: tab, conversationId };
   }
 

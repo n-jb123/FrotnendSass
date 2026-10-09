@@ -29,6 +29,7 @@ export const FileUpload: React.FC<FileUploadProps> = ({
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [files, setFiles] = useState<File[]>(value ?? []);
+  const [validationMessage, setValidationMessage] = useState('');
 
   useEffect(() => {
     if (value) setFiles(value);
@@ -41,8 +42,16 @@ export const FileUpload: React.FC<FileUploadProps> = ({
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const incoming = Array.from(event.target.files ?? []);
-    const valid = incoming.filter((file) => file.size <= maxSizeMb * 1024 * 1024);
-    const next = [...files, ...valid].slice(0, maxFiles);
+    const sizeLimit = maxSizeMb * 1024 * 1024;
+    const tooLarge = incoming.filter((file) => file.size > sizeLimit);
+    const sizeValid = incoming.filter((file) => file.size <= sizeLimit);
+    const candidates = multiple ? [...files, ...sizeValid] : sizeValid.slice(0, 1);
+    const next = candidates.slice(0, maxFiles);
+    const messages: string[] = [];
+    if (tooLarge.length) messages.push(`${tooLarge.length} file(s) exceeded the ${maxSizeMb} MB limit and were skipped.`);
+    if (candidates.length > maxFiles) messages.push(`Only the first ${maxFiles} file(s) were kept.`);
+    if (!multiple && incoming.length > 1) messages.push('Select one file at a time.');
+    setValidationMessage(messages.join(' '));
     update(next);
     event.target.value = '';
   };
@@ -69,6 +78,10 @@ export const FileUpload: React.FC<FileUploadProps> = ({
         <Paperclip className="w-3.5 h-3.5" />
         {label}
       </button>
+
+      {validationMessage && (
+        <p className="text-xs text-rose-600 dark:text-rose-400" role="status">{validationMessage}</p>
+      )}
 
       {files.length > 0 && (
         <div className="space-y-1.5" aria-live="polite">
